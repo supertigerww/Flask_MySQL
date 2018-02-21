@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>The Wall</title>
+    </head>
+    <body>
+        <header>
+            <h1>The Wall</h1>
+            <form action="/logout" method="post">
+                <input type="submit" name="logout" value="Logout">
+            </form>
+            <p>Welcome {{session['user']['first_name']}} {{session['user']['last_name']}}</p>
+        </header>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <div>
+            <h3>{{message}}</h1>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <h2>Post a messages</h2>
+        <form action="/message" method="post">
+            <textarea name="message" rows="8" cols="80"></textarea>
+            <input type="submit" name="submit" value="Post a message">
+        </form>
+        <div id="messages">
+            <h2>Messages</h2>
+            {% for message in message_list %}
+                <div class="message">
+                    <h3>{{message['first_name']}} {{message['last_name']}} - {{message['created_at']}}</h3>
+                    <p>{{message['message']}}</p>
+                    <!-- {% if message['user_id'] == session['user']['id'] %}
+                        <a href="/wall/message/delete/{{message['id']}}">Delete</a>
+                    {% endif %} -->
+                </div>
+                <div class="comments">
+                    <h3>Comments</h3>
+                    {% for comment in comment_list %}
+                        {% if comment['messages_id'] == message['id'] %}
+                            <h4>{{comment['first_name']}} {{comment['last_name']}} - {{comment['created_at']}}</h4>
+                            <p>{{comment['comment']}}</p>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <form action="/success/comment/{{message['id']}}" method="post">
+                    <textarea name="comment" rows="5" cols="60"></textarea>
+                    <input type="submit" name="submit" value="Post a comment">
+                </form>
+            {% endfor %}
+        </div>
+
+    </body>
+</html>

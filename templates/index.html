@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PAGE</title>
+</head>
+<body>
+    <div class=register>
+        <h3>Register</h3>
+        <form action="/process" method='post'>
+        {% with errors = get_flashed_messages(category_filter=["firstNameError"]) %}
+        {% if errors %}
+        {% for message in errors %}
+        <p>{{message}}</p>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <label for="firstName">First Name:</label>
+        <input type='text' name='firstName'>
+        {% with errors = get_flashed_messages(category_filter=["lastNameError"]) %}
+        {% if errors %}
+        {% for message in errors %}
+        <p>{{message}}</p>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <label for="lastName">Last Name:</label>
+        <input type='text' name='lastName'>
+        {% with errors = get_flashed_messages(category_filter=["emailError"]) %}
+        {% if errors %}
+        {% for message in errors %}
+        <p>{{message}}</p>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <label for="email">Email:</label>
+        <input type='text' name='email'>
+        {% with errors = get_flashed_messages(category_filter=["passwordError"]) %}
+        {% if errors %}
+        {% for message in errors %}
+        <p>{{message}}</p>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <label for="password">Password:</label>
+        <input type='text' name='password'>
+        {% with errors = get_flashed_messages(category_filter=["confirmPasswordError"]) %}
+        {% if errors %}
+        {% for message in errors %}
+        <p>{{message}}</p>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <label for="confirmPassword">Confrim Password:</label>
+        <input type='text' name='confirmPassword'>
+        <button>Register</button>
+        </form>
+    </div>
+    <div class=login>
+        <h3>LogIn</h3>
+        <form action='/login' method='post'>
+        {% with errors = get_flashed_messages(category_filter=["loginError"]) %}
+        {% if errors %}
+        {% for message in errors %}
+        <p>{{message}}</p>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <label for='loginemail'>Email:</label>
+        <input type='text' name='loginemail'>
+        {% with errors = get_flashed_messages(category_filter=["loginError"]) %}
+        {% if errors %}
+        {% for message in errors %}
+        <p>{{message}}</p>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <label for='loginpassword'>Password:</label>
+        <input type='text' name='loginpassword'>
+        <button>Login</button>
+        </form>
+    </div>
+</body>
+</html>
